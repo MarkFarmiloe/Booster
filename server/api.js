@@ -62,5 +62,48 @@ router.post("/newEnergiser", function (req, res) {
 });
 
 
+router.get("/users", (req, res) => {
+    console.log(dbUrl);
+    //res.send("Hello");
+    pool.query("SELECT * FROM users")
+    .then((result) => {
+        console.log(result);
+        res.json(result.rows);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).send(err);
+    });
+});
+
+//SignUp
+
+router.post("/signup", function (req, res) {
+	const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+
+	pool
+		.query("SELECT * FROM users WHERE email = $1", [email])
+		.then((result) => {
+			if (result.rows.length > 0) {
+				return res
+					.status(400)
+					.send("A Email with the same address is already exists!");
+			} else {
+				pool
+					.query(
+						"Insert Into users (name, email, password) values ($1, $2, $3)",
+						[
+							name,
+							email,
+							password,
+						]
+					)
+					.then((result) => res.json(result.rows))
+					.catch((e) => console.error(e));
+			}
+		});
+});
+
 
 export default router;
