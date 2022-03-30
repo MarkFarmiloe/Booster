@@ -13,9 +13,7 @@ export const configuredHelmet = () =>
 				upgradeInsecureRequests: [],
 			},
 		},
-		crossOriginResourcePolicy: { 
-			policy: "cross-origin", 
-		},
+		crossOriginEmbedderPolicy: false,
 	});
 
 export const httpsOnly = () => (req, res, next) => {
