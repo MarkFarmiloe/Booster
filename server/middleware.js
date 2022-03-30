@@ -6,7 +6,7 @@ export const configuredHelmet = () =>
 		contentSecurityPolicy: {
 			directives: {
 				defaultSrc: ["'self'"],
-				imageSrc: ["'self'", "i.imgur.com", "images.unsplash.com"],
+				imgSrc: ["'self'", "i.imgur.com", "images.unsplash.com"],
 				objectSrc: ["'none'"],
 				scriptSrc: ["'self'", "unpkg.com", "polyfill.io"],
 				styleSrc: ["'self'", "https: 'unsafe-inline'"],
